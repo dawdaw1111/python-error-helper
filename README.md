@@ -1,43 +1,38 @@
-# PyErr - Python 纠错助手
+<div align="center">
 
-`PyErr` 是一个面向 Python 初学者的报错分析与速查工具，采用前后端分离架构：
+# PyErr
+### Python 纠错助手（Error Analyze + Search）
 
-- `frontend/`：Vue 3 + TypeScript + Vite
-- `backend/`：FastAPI + SQLAlchemy + SQLite
+![Frontend](https://img.shields.io/badge/Frontend-Vue%203-42b883?style=flat-square)
+![Backend](https://img.shields.io/badge/Backend-FastAPI-009688?style=flat-square)
+![Database](https://img.shields.io/badge/Database-SQLite-3b82f6?style=flat-square)
+![Stars](https://img.shields.io/github/stars/dawdaw1111/python-error-helper?style=flat-square)
+![Last Commit](https://img.shields.io/github/last-commit/dawdaw1111/python-error-helper?style=flat-square)
 
-## 核心功能
+</div>
 
-- 报错分析：输入报错信息后返回解释、常见原因、排查步骤和建议方案
-- 错误检索：支持关键字搜索（中英文/模糊）
-- 热门错误：提供高频错误入口，便于快速查阅
-- 反馈机制：用户可提交分析反馈，持续优化规则
-- 管理后台：规则增删改查、统计信息查看、登录保护
+面向 Python 初学者的报错速查系统。输入报错信息后，系统会给出解释、常见原因、排查步骤和可执行修复建议。
 
-## 项目结构
+![PyErr Preview](./docs/preview.png)
 
-- `backend/`：API 服务与数据层
-- `frontend/`：Web 前端应用
-- `docker-compose.yml`：一键部署编排
-- `DEPLOY.md`：Linux 服务器部署说明
-- `.env.server.example`：服务端环境变量示例
+## 功能模块
 
-## 主要 API
+- 错误分析：`POST /api/analyze`
+- 错误搜索：`GET /api/search`
+- 热门错误：`GET /api/highlights`
+- 反馈回流：`POST /api/feedback`
+- 管理后台：规则管理与统计（登录保护）
 
-- `POST /api/analyze`
-- `GET /api/search`
-- `GET /api/highlights`
-- `POST /api/auth/login`
-- `GET /api/auth/me`
-- `POST /api/feedback`
-- `GET /api/admin/rules`
-- `POST /api/admin/rules`
-- `PUT /api/admin/rules/{id}`
-- `DELETE /api/admin/rules/{id}`
-- `GET /api/admin/stats`
+## 技术架构
 
-## 本地开发
+- 前端：Vue 3 + TypeScript + Vite
+- 后端：FastAPI + SQLAlchemy
+- 存储：SQLite
+- 部署：Docker Compose（单机即可）
 
-### 1. 启动后端
+## 快速启动
+
+### 1) 后端
 
 ```bash
 cd backend
@@ -49,7 +44,7 @@ python -m uvicorn app.main:app --reload
 
 后端默认地址：`http://127.0.0.1:8000`
 
-### 2. 启动前端
+### 2) 前端
 
 ```bash
 cd frontend
@@ -58,6 +53,15 @@ npm run dev
 ```
 
 前端默认地址：`http://127.0.0.1:5173`
+
+## Docker 部署
+
+```bash
+cp .env.server.example .env
+docker compose up -d --build
+```
+
+详细参数见 [DEPLOY.md](./DEPLOY.md)。
 
 ## 管理员默认账号
 
@@ -70,14 +74,4 @@ npm run dev
 - `PYERR_ADMIN_PASSWORD`
 - `PYERR_TOKEN_SECRET`
 - `PYERR_TOKEN_EXPIRE_SECONDS`
-
-## Docker 部署
-
-参见 [DEPLOY.md](./DEPLOY.md)。
-
-基本步骤：
-
-1. 复制 `.env.server.example` 为 `.env`
-2. 按服务器信息修改环境变量
-3. 运行 `docker compose up -d --build`
 
